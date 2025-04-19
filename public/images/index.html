@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIBF Stand Booking Payment</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #1d2054;
+      margin: 0;
+      padding: 0;
+      background-color: #f9fafb;
+      background-image: url('images/pattern-bg.png');
+      background-repeat: repeat;
+      background-size: 200px;
+      background-opacity: 0.1;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .header {
+      text-align: center;
+      padding: 30px 0;
+      background: linear-gradient(135deg, #1d2054 0%, #2a2d6a 100%);
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(29, 32, 84, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('/images/past-highlight/NIBF-2021-pic.webp');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      z-index: 0;
+    }
+    .header-content {
+      position: relative;
+      z-index: 1;
+    }
+    .logo {
+      max-width: 220px;
+      height: auto;
+      margin-bottom: 20px;
+      filter: brightness(0) invert(1);
+    }
+    .content {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(29, 32, 84, 0.08);
+    }
+    .button {
+      display: inline-block;
+      background: linear-gradient(135deg, #d63131 0%, #c62828 100%);
+      color: white;
+      text-decoration: none;
+      padding: 15px 35px;
+      border-radius: 6px;
+      font-weight: 500;
+      margin: 25px 0;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+    }
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(214, 49, 49, 0.2);
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #edf2f7;
+      font-size: 13px;
+      color: #718096;
+    }
+    .highlight {
+      background-color: #f8fafc;
+      padding: 25px;
+      border-left: 4px solid #d63131;
+      margin: 30px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    h1 {
+      color: #ffffff;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    p {
+      margin: 0 0 20px 0;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .highlight p {
+      margin: 8px 0;
+    }
+    .highlight strong {
+      color: #1d2054;
+    }
+    .payment-link {
+      background-color: #f8fafc;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #1d2054;
+      word-break: break-all;
+      margin: 20px 0;
+      border: 1px solid rgba(29, 32, 84, 0.1);
+    }
+    .signature {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #edf2f7;
+    }
+    .signature p {
+      margin: 5px 0;
+    }
+    strong {
+      color: #1d2054;
+    }
+    .past-highlights {
+      margin: 30px 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .highlight-image {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(29, 32, 84, 0.1);
+    }
+    .highlight-image img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .highlight-image:hover img {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-content">
+        <img src="/images/nibf-logo-white.png" alt="NIBF Logo" class="logo">
+        <h1>NIBF Stand Booking Confirmation</h1>
+      </div>
+    </div>
+    
+    <div class="content">
+      <p>Dear <strong>${bookStand.contact_name}</strong>,</p>
+      
+      <p>We are delighted to confirm your approved stand booking for the National Book Fair. Your participation will contribute significantly to this prestigious event.</p>
+      
+      <div class="highlight">
+        <p><strong>Booking Details:</strong></p>
+        <p>Reference ID: <strong>${bookStand.reference_id}</strong></p>
+        <p>Company: <strong>${bookStand.company_name}</strong></p>
+        <p>Stand Type: <strong>${bookStand.stand_type}</strong></p>
+      </div>
+
+      <div class="past-highlights">
+        <div class="highlight-image">
+          <img src="/images/past-highlight/710-Nigeria-International-Book-Fair-ftw-710x472.jpg" alt="NIBF Past Event">
+        </div>
+        <div class="highlight-image">
+          <img src="/images/past-highlight/thumbnail-2-13.jpg" alt="NIBF Past Event">
+        </div>
+      </div>
+      
+      <p>To finalize your booking, please complete the payment process using our secure payment portal:</p>
+      
+      <div style="text-align: center;">
+        <a href="${paymentLink}" class="button">Proceed to Payment</a>
+      </div>
+      
+      <p>For your convenience, you may also use this secure payment link:</p>
+      <div class="payment-link">${paymentLink}</div>
+      
+      <p>Our dedicated support team is available to assist you with any inquiries or requirements you may have.</p>
+      
+      <div class="signature">
+        <p>We look forward to your distinguished presence at the National Book Fair.</p>
+        <p>Best regards,<br>
+        <strong>The NIBF Team</strong></p>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>This is an automated message. Please do not reply directly to this email.</p>
+      <p>&copy; ${new Date().getFullYear()} National Book Fair. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
