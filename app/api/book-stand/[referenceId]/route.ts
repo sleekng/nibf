@@ -5,10 +5,10 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { referenceId: string } }
+  context: { params: { referenceId: string } }
 ) {
   try {
-    const referenceId = params.referenceId;
+    const referenceId = context.params.referenceId;
     console.log('Fetching book stand with reference ID:', referenceId);
     
     if (!referenceId) {
