@@ -18,11 +18,12 @@ jobs:
         node-version: '18'
         cache: 'npm'
 
-    - name: Install dependencies
+    - name: Clean install
       run: |
-        npm install --no-package-lock
-        npm install react@19 react-dom@19 --no-package-lock
-        npm install react-day-picker@8.10.1 --no-package-lock --legacy-peer-deps
+        rm -rf node_modules
+        rm -f package-lock.json
+        npm cache clean --force
+        npm install --force --legacy-peer-deps
 
     - name: Build application
       env:
@@ -49,4 +50,6 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd ${{ secrets.DEPLOY_PATH }}
-          npm install --no-package-lock --legacy-peer-deps 
+          rm -rf node_modules
+          rm -f package-lock.json
+          npm install --force --legacy-peer-deps 
